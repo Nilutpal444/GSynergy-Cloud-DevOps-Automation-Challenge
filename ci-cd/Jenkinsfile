@@ -1,0 +1,46 @@
+// ci-cd/Jenkinsfile
+
+pipeline {
+  agent any
+
+  stages {
+    stage('Build and Deploy IaC') {
+      steps {
+        script {
+          // Use Terraform CLI to apply IaC changes
+          sh 'cd iac/database && terraform init && terraform apply -auto-approve'
+          sh 'cd iac/airflow && terraform init && terraform apply -auto-approve'
+          // Add steps for deploying Glue or other data pipelines if needed
+        }
+      }
+    }
+
+    stage('Data Loading') {
+      steps {
+        // Run Python scripts to load data into storage
+        sh 'python scripts/load_data.py'
+      }
+    }
+
+    stage('Deploy Airflow DAGs') {
+      steps {
+        // Add steps to deploy Airflow DAGs
+      }
+    }
+
+    stage('Run Tests') {
+      steps {
+        // Add tests to validate infrastructure and pipelines
+      }
+    }
+  }
+
+  post {
+    success {
+      // Notify success or perform other actions
+    }
+    failure {
+      // Notify failure or perform other actions
+    }
+  }
+}
