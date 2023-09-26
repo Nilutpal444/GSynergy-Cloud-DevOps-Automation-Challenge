@@ -5,8 +5,7 @@
 # Task: Build and Deploy a Database/Data-Warehouse Server, Airflow Server, and Set Up CI/CD
 
 
-# Step 1: 
-Database Server (AWS Redshift)
+Step 1: Database Server (AWS Redshift)
 
 Explanation: In this step, we'll use Terraform to provision an AWS Redshift database server. Redshift is a fully managed data warehouse service in AWS.
 
